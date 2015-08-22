@@ -8,9 +8,9 @@ dependencies:
     src: htmlwidgets/lib/d3
     script: d3.min.js
   - name: react
-    version: 0.13.3
+    version: 0.14.0
     src: htmlwidgets/lib/react
-    script: [react.js,JSXTransformer.js]
+    script: [react.min.js,JSXTransformer.js]
   - name: react-stockcharts
     version: 0.2.0
     src: htmlwidgets/lib/react-stockcharts
