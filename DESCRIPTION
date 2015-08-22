@@ -5,6 +5,11 @@ Version: 0.1
 Date: 2015-08-22
 Authors@R: c(
       person(
+        "Jquery Foundation"
+        , role = c("aut", "cph")
+        , comment = "jquery library in htmlwidgets/lib, http://jquery.com"
+      ),
+      person(
         "Mike", "Bostock"
         , role = c("aut", "cph")
         , comment = "d3.js library in htmlwidgets/lib, http://d3js.org"
