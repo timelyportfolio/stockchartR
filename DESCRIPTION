@@ -1,10 +1,39 @@
 Package: stockchartR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Interactive React-stockcharts in R
 Version: 0.1
 Date: 2015-08-22
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: c(
+      person(
+        "Mike", "Bostock"
+        , role = c("aut", "cph")
+        , comment = "d3.js library in htmlwidgets/lib, http://d3js.org"
+      ),
+      person(
+        "Facebook"
+        , role = c("aut", "cph")
+        , comment = "react library in htmlwidgets/lib, https://github.com/facebook/react"
+      ),
+      person(
+        "Ragu", "Ramaswamy"
+        , role = c("aut", "cph")
+        , comment = "react-stockcharts library in htmlwidgets/lib, https://github.com/rrag/react-stockcharts"
+      ),
+      person(
+        "Kent", "Russell"
+        , role = c("aut", "cre")
+        , comment = "R interface"
+        , email = "kent.russell@timelyportfolio.com"
+      )
+    )
+Maintainer: Kent Russell <kent.russell@timelyportfolio.com>
+Description: Make interactive financial charts with the d3.js & React based
+              react-stockcharts.
+License: MIT + file LICENSE
 LazyData: TRUE
+Imports:
+  htmlwidgets,
+  htmltools
+Suggests:
+  knitr
+VignetteBuilder: knitr
