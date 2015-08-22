@@ -5,11 +5,11 @@
 #' @import htmlwidgets
 #'
 #' @export
-stockchart <- function(message, width = NULL, height = NULL) {
+stockchart <- function(data = NULL, width = NULL, height = NULL) {
 
   # forward options using x
   x = list(
-    message = message
+    data = data
   )
 
   # create widget
@@ -19,6 +19,85 @@ stockchart <- function(message, width = NULL, height = NULL) {
     width = width,
     height = height,
     package = 'stockchartR'
+  )
+}
+
+stockchart_html <- function(name, package, id, style, class, ...){
+  htmltools::tagList(
+    htmltools::tags$div(id = id, style = style, class = class, ...)
+    ,htmltools::tags$script(type="text/jsx;harmony=true"
+      ,
+htmltools::HTML('
+
+var ChartCanvas = ReStock.ChartCanvas
+, XAxis = ReStock.XAxis
+, YAxis = ReStock.YAxis
+, CandlestickSeries = ReStock.CandlestickSeries
+, DataTransform = ReStock.DataTransform
+, Chart = ReStock.Chart
+, DataSeries = ReStock.DataSeries
+, ChartWidthMixin = ReStock.helper.ChartWidthMixin
+, HistogramSeries = ReStock.HistogramSeries
+, EventCapture = ReStock.EventCapture
+, MouseCoordinates = ReStock.MouseCoordinates
+, CrossHair = ReStock.CrossHair
+, TooltipContainer = ReStock.TooltipContainer
+, OHLCTooltip = ReStock.OHLCTooltip
+;
+
+var CandleStickChartWithZoomPan = React.createClass({
+mixins: [ChartWidthMixin],
+render() {
+if (this.state === null || !this.state.width) return <div />;
+
+var dateFormat = d3.time.format("%Y-%m-%d");
+
+return (
+<ChartCanvas width={this.state.width} height={400}
+margin={{left: 70, right: 70, top:10, bottom: 30}} data={this.props.data}>
+<DataTransform transformType="stockscale">
+<Chart id={1} yMousePointerDisplayLocation="right" yMousePointerDisplayFormat={(y) => y.toFixed(2)}>
+<XAxis axisAt="bottom" orient="bottom"/>
+<YAxis axisAt="right" orient="right" ticks={5} />
+<DataSeries yAccessor={CandlestickSeries.yAccessor} >
+<CandlestickSeries />
+</DataSeries>
+</Chart>
+<Chart id={2} yMousePointerDisplayLocation="left" yMousePointerDisplayFormat={d3.format(".4s")}
+height={150} origin={(w, h) => [0, h - 150]}>
+<YAxis axisAt="left" orient="left" ticks={5} tickFormat={d3.format("s")}/>
+<DataSeries yAccessor={(d) => d.volume} >
+<HistogramSeries className={(d) => d.close > d.open ? "up" : "down"} />
+</DataSeries>
+</Chart>
+<MouseCoordinates xDisplayFormat={dateFormat} type="crosshair" />
+<EventCapture mouseMove={true} zoom={true} pan={true} mainChart={1} defaultFocus={false} />
+<TooltipContainer>
+<OHLCTooltip forChart={1} origin={[-40, 0]}/>
+</TooltipContainer>
+</DataTransform>
+</ChartCanvas>
+);
+}
+});
+
+var parseDate = d3.time.format("%Y-%m-%d").parse;
+d3.tsv("http://rrag.github.io/react-stockcharts/data/MSFT.tsv", (err, data) => {
+/* change MSFT.tsv to MSFT_full.tsv above to see how this works with lots of data points */
+data.forEach((d, i) => {
+d.date = new Date(parseDate(d.date).getTime());
+d.open = +d.open;
+d.high = +d.high;
+d.low = +d.low;
+d.close = +d.close;
+d.volume = +d.volume;
+// console.log(d);
+});
+
+React.render(<CandleStickChartWithZoomPan data={data} />, document.getElementById("chart"));
+});
+')
+    )
   )
 }
 

@@ -15,3 +15,4 @@ dependencies:
     version: 0.2.0
     src: htmlwidgets/lib/react-stockcharts
     script: react-stockcharts.min.js
+    stylesheet: react-stockcharts.css
