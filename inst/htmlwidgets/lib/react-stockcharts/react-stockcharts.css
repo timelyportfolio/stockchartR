@@ -1,8 +1,3 @@
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-}
-
 .react-stockchart .axis path,
 .react-stockchart .axis line {
   fill: none;

@@ -24,7 +24,7 @@ stockchart <- function(data = NULL, width = NULL, height = NULL) {
 
 stockchart_html <- function(name, package, id, style, class, ...){
   htmltools::tagList(
-    htmltools::tags$div(id = id, style = style, class = class, ...)
+    htmltools::tags$div(id = id, style = style, class = class, class = "react-stockchart", ...)
     ,htmltools::tags$script(type="text/jsx;harmony=true"
       ,
 htmltools::HTML('
@@ -79,22 +79,6 @@ height={150} origin={(w, h) => [0, h - 150]}>
 </ChartCanvas>
 );
 }
-});
-
-var parseDate = d3.time.format("%Y-%m-%d").parse;
-d3.tsv("http://rrag.github.io/react-stockcharts/data/MSFT.tsv", (err, data) => {
-/* change MSFT.tsv to MSFT_full.tsv above to see how this works with lots of data points */
-data.forEach((d, i) => {
-d.date = new Date(parseDate(d.date).getTime());
-d.open = +d.open;
-d.high = +d.high;
-d.low = +d.low;
-d.close = +d.close;
-d.volume = +d.volume;
-// console.log(d);
-});
-
-React.render(<CandleStickChartWithZoomPan data={data} />, document.getElementById("chart"));
 });
 ')
     )
