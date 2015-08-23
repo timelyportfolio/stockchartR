@@ -6,6 +6,22 @@
 #'
 #' @export
 stockchart <- function(data = NULL, width = NULL, height = NULL) {
+  # force xts data
+  tryCatch({
+      data <- as.xts(data)
+    }
+    , error = function(e) "please provide data that is xts or can convert into xts."
+  )
+
+  data <- data.frame(
+    date = format( index( data ), "%Y-%m-%d" )
+    , open = as.vector( Op( data ) )
+    , high = as.vector( Hi( data ) )
+    , low = as.vector( Lo( data ) )
+    , close = as.vector( Cl( data ) )
+    , volume = as.vector( Vo( data ) )
+    , adjusted = as.vector( Ad( data ) )
+  )
 
   # forward options using x
   x = list(

@@ -4,7 +4,7 @@
 \alias{stockchart}
 \title{<Add Title>}
 \usage{
-stockchart(message, width = NULL, height = NULL)
+stockchart(data = NULL, width = NULL, height = NULL)
 }
 \description{
 <Add Description>
