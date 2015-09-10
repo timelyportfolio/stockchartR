@@ -2,11 +2,28 @@
 % Please edit documentation in R/stockchart.R
 \name{stockchart}
 \alias{stockchart}
-\title{<Add Title>}
+\title{Interactive d3/React Stockcharts}
 \usage{
 stockchart(data = NULL, width = NULL, height = NULL)
 }
+\arguments{
+\item{data}{time series price data ideally \code{\link{xts}}.  OHCLV is required.}
+}
 \description{
-<Add Description>
+Create interactive stock charts using the d3.js + React
+  \href{http://rrag.github.io/react-stockcharts/}{react-stockcharts}.  Currently
+  only the pan+zoom candlestick with volume histogram is available, but expect
+  complete coverage and full functionality soon.
+}
+\examples{
+library(stockchartR)
+library(quantmod)
+
+spy <- getSymbols("SPY", auto.assign = F)
+
+stockchart(tail(spy,200))
+
+aapl <- getSymbols("AAPL", auto.assign = FALSE)
+stockchart(adjustOHLC(aapl))
 }
 

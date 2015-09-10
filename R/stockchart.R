@@ -1,6 +1,13 @@
-#' <Add Title>
+#' Interactive d3/React Stockcharts
 #'
-#' <Add Description>
+#' Create interactive stock charts using the d3.js + React
+#'   \href{http://rrag.github.io/react-stockcharts/}{react-stockcharts}.  Currently
+#'   only the pan+zoom candlestick with volume histogram is available, but expect
+#'   complete coverage and full functionality soon.
+#'
+#' @param data time series price data ideally \code{\link{xts}}.  OHCLV is required.
+#'
+#' @example ./inst/examples/example_stockchart.R
 #'
 #' @import htmlwidgets
 #'
