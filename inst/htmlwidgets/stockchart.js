@@ -31,7 +31,7 @@ HTMLWidgets.widget({
       React.render(
         React.createElement(
           CandleStickChartWithZoomPan,
-          {data: x.data}
+          x
         ), document.getElementById(el.id)
       ), 3000})
 
